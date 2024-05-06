@@ -1,13 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import moviesById from '../../moviesId-api';
+import { getDetailsMovies } from '../../movies-api';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import MovieList from '../../components/MovieList/MovieList';
 
 export default function MovieDetailsPage() {
   const { moviesId } = useParams();
-  const [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -16,7 +16,7 @@ export default function MovieDetailsPage() {
       try {
         setError(false);
         setIsLoading(true);
-        const data = await moviesById({ moviesId });
+        const data = await getDetailsMovies(moviesId);
         setMovies(data);
       } catch (error) {
         setError(true);
@@ -33,6 +33,16 @@ export default function MovieDetailsPage() {
       {movies.length > 0 && <MovieList />}
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
+      <ul>
+        <li>
+          <Link to="Cast">MovieCast</Link>
+        </li>
+        <li>
+          <Link to="Reviews">MovieReviews</Link>
+        </li>
+      </ul>
+
+      <Outlet />
     </div>
   );
 }

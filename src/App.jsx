@@ -1,11 +1,9 @@
-// import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Navigation from './components/Navigation/Navigation';
 import HomePage from './pages/HomePage/HomePage';
 import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage';
-import MovieList from './components/MovieList/MovieList';
 import MoviesPage from './pages/MoviesPage/MoviesPage';
 import MovieCast from './components/MovieCast/MovieCast';
 import MovieReviews from './components/MovieReviews/MovieReviews';
@@ -17,12 +15,12 @@ export default function App() {
       <Navigation />
 
       <Routes>
-        <Route path="/" element={<HomePage onRender={MovieList} />} />
-        <Route path="/Movies" element={<MoviesPage onRender={MovieList} />}>
-          <Route path=":movieId/cast" element={<MovieCast />} />
-          <Route path=":movieId/reviews" element={<MovieReviews />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/Movies" element={<MoviesPage />} />
+        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+          <Route path="cast" element={<MovieCast />} />
+          <Route path="reviews" element={<MovieReviews />} />
         </Route>
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

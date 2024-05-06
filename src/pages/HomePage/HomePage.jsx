@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import getMovies from '../../trendingMovie-api';
+import { getTrendingMovies } from '../../movies-api';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Loader from '../../components/Loader/Loader';
 import MovieList from '../../components/MovieList/MovieList';
@@ -14,7 +14,7 @@ export default function HomePage() {
       try {
         setError(false);
         setIsLoading(true);
-        const data = await getMovies();
+        const data = await getTrendingMovies();
         setMovies(data);
       } catch (error) {
         setError(true);
@@ -28,8 +28,8 @@ export default function HomePage() {
 
   return (
     <div>
+      {movies.length > 0 && <MovieList movies={movies} />}
       {isLoading && <Loader />}
-      <MovieList movies={movies} />
       {error && <ErrorMessage />}
     </div>
   );
