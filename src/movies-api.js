@@ -21,52 +21,32 @@ export const getTrendingMovies = async function () {
   return response.data.results;
 };
 
-export const getSearchMovies = async function () {
-  const response = await axios.get(`${url}/search/movie`, options);
+export const getSearchMovies = async function (query, page) {
+  const response = await axios.get(`${url}/search/movie`, {
+    params: {
+      query: query,
+      page: page,
+    },
+    headers: options.headers,
+  });
 
   return response.data.results;
 };
 
-export const getDetailsMovies = async function ({ id }) {
+export const getDetailsMovies = async function (id) {
   const response = await axios.get(`${url}/movie/${id}`, options);
 
-  return response.data.results;
+  return response.data;
 };
 
-export const getCreditsMovies = async function ({ id }) {
+export const getCreditsMovies = async function (id) {
   const response = await axios.get(`${url}/movie/${id}/credits`, options);
 
-  return response.data.results;
+  return response.data;
 };
 
-export const getReviewsMovies = async function ({ id }) {
+export const getReviewsMovies = async function (id) {
   const response = await axios.get(`${url}/movie/${id}/reviews`, options);
 
   return response.data.results;
 };
-
-/* {
-  "page": 1,
-  "results": [
-    {
-      "backdrop_path": "/bWIIWhnaoWx3FTVXv6GkYDv3djL.jpg",
-      "id": 940721,
-      "original_title": "ゴジラ-1.0",
-      "overview": "Postwar Japan is at its lowest point when a new crisis emerges in the form of a giant monster, baptized in the horrific power of the atomic bomb.",
-      "poster_path": "/hkxxMIGaiCTmrEArK7J56JTKUlB.jpg",
-      "media_type": "movie",
-      "adult": false,
-      "title": "Godzilla Minus One",
-      "original_language": "ja",
-      "genre_ids": [
-        878,
-        27,
-        28
-      ],
-      "popularity": 1017.628,
-      "release_date": "2023-11-03",
-      "video": false,
-      "vote_average": 7.877,
-      "vote_count": 681
-    },
-*/

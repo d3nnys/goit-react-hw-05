@@ -1,31 +1,32 @@
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import Navigation from './components/Navigation/Navigation';
-import HomePage from './pages/HomePage/HomePage';
-import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage';
-import MoviesPage from './pages/MoviesPage/MoviesPage';
-import MovieCast from './components/MovieCast/MovieCast';
-import MovieReviews from './components/MovieReviews/MovieReviews';
+import Layout from './components/Layout/Layout';
+const NotFoundPage = lazy(() =>
+  import('./pages/NotFoundPage/NotFoundPage.jsx')
+);
+const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
+const MovieDetailsPage = lazy(() =>
+  import('./pages/MovieDetailsPage/MovieDetailsPage')
+);
+const MoviesPage = lazy(() => import('./pages/MoviesPage/MoviesPage'));
+const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'));
+const MovieReviews = lazy(() =>
+  import('./components/MovieReviews/MovieReviews')
+);
 
 export default function App() {
   return (
-    <>
-      <h1>Welcome</h1>
-      <Navigation />
-
+    <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/Movies" element={<MoviesPage />} />
+        <Route path="/movies" element={<MoviesPage />} />
         <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
           <Route path="cast" element={<MovieCast />} />
           <Route path="reviews" element={<MovieReviews />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </>
+    </Layout>
   );
 }
-
-// key API 231a94a8d378882c44b46cf4d8657a0f
-// token eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMzFhOTRhOGQzNzg4ODJjNDRiNDZjZjRkODY1N2EwZiIsInN1YiI6IjY2MmQzMzk1NWE3ODg0MDEyN2MxNjNiYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Yc0zv0l6Gz1Ru0UFSu4rjwylgkfLlA_tlvnXjTx5CUg

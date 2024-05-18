@@ -1,0 +1,23 @@
+.notFound {
+  text-align: center;
+  font-size: 18px;
+}
+
+.list {
+  /* display: flex; */
+  /* align-items: center; */
+  gap: 20px;
+}
+
+.username {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* .item {
+  margin: 20px 0;
+} */
+
+.hr {
+  margin: 20px 0;
+}
